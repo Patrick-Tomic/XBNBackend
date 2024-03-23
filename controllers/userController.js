@@ -60,3 +60,7 @@ exports.signup = [
         return res.status(200).json('User Created Successfully')
     }
 ]
+
+exports.logout = (req,res,next) => {
+    console.log('logged out')
+}
