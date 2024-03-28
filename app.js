@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express')
+const serverless = require("serverless-http")
 const app = express()
 const mongoose = require('mongoose')
 const apiRouter = require('./routes/api')
@@ -15,8 +16,8 @@ db.on('error',console.error.bind(console,'mongo connection error'))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
  
-app.use('/api', apiRouter) 
+app.use('/.netlify/functions/api', apiRouter) 
 
 app.listen(3000,()  => console.log('listening on port 3000'))
 
-module.exports = app
+module.exports.handler = serverless(app)
